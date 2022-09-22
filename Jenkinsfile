@@ -40,7 +40,7 @@ pipeline {
                 script {
                     
 
-                        powershell  " sonar-scanner -X -D sonar.host.url=${SONAR_HOST_URL} \
+                        bat  " sonar-scanner -X -D sonar.host.url=${SONAR_HOST_URL} \
                               -D sonar.login=${SONAR_AUTH_TOKEN} \
                               -D sonar.projectKey=${PROJECT_ROOT} \
                               -D sonar.projectName=${PROJECT_ROOT} "
@@ -53,7 +53,7 @@ pipeline {
             steps {
                 script {
                     
-                        powershell  " MsBuild.exe /t:Rebuild"
+                        bat  " MsBuild.exe --version"
                         //powershell  "MsBuild.exe /t:Clean && MsBuild.exe /t:Rebuild"
                         //powershell "MSBuild.exe ContosoUniversity.sln /p:Configuration=Release"
                 }
