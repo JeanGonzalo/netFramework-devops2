@@ -65,7 +65,7 @@ pipeline {
                 script {   
                             bat "cd ContosoUniversity/bin && tar -a -c -f ${PLATFORM}.zip ${PLATFORM} && dir" 
                             bat "copy ContosoUniversity/bin/${PLATFORM}.zip ."                           
-                            bat "curl --fail -u admin:jeandevops --upload-file ${PLATFORM}.zip 'http://192.168.1.34:8081/repository/nuget-raw/${PLATFORM}.zip'"
+                            bat "curl --fail -u admin:jeandevops --upload-file ${PLATFORM}.zip -x POST 'http://192.168.1.34:8081/repository/nuget-raw/${PLATFORM}.zip'"
                             
                             //bat "dir && cd ContosoUniversity && cd , && dir"
                             
