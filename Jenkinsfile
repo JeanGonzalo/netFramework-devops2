@@ -32,22 +32,22 @@ pipeline {
       stage('Checkout') {
         steps {
         // Get Github repo using Github credentials (previously added to Jenkins credentials)
-        checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/JeanGonzalo/netFramework-devops.git']]])        }
+        checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/JeanGonzalo/netFramework-devops.git']]])        }
       }
     
-    //   stage("SonarQube - Static Code Analysis") {
-    //         steps {
-    //             script {
+      stage("SonarQube - Static Code Analysis") {
+            steps {
+                script {
                     
 
-    //                     powershell  " sonar-scanner -X -D sonar.host.url=${SONAR_HOST_URL} \
-    //                           -D sonar.login=${SONAR_AUTH_TOKEN} \
-    //                           -D sonar.projectKey=${PROJECT_ROOT} \
-    //                           -D sonar.projectName=${PROJECT_ROOT} "
-    //                         //-Dsonar.projectVersion='${projectVersion}' ${pullRequestParams} \
-    //             }
-    //         }
-    //   }
+                        powershell  " sonar-scanner -X -D sonar.host.url=${SONAR_HOST_URL} \
+                              -D sonar.login=${SONAR_AUTH_TOKEN} \
+                              -D sonar.projectKey=${PROJECT_ROOT} \
+                              -D sonar.projectName=${PROJECT_ROOT} "
+                            //-Dsonar.projectVersion='${projectVersion}' ${pullRequestParams} \
+                }
+            }
+      }
 
       stage("Build .net framework") {
             steps {
