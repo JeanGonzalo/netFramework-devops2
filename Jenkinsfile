@@ -22,7 +22,7 @@ pipeline {
       SONAR_AUTH_TOKEN = '6d04544a33272dddd889aef89ee658badc6009b2'
       NEXUS_URL = "http://192.168.1.34:8081"
       NEXUS_REPOSITORY = "nuget-hosted"
-      PATHH = "D:/jenkins/workspace/blue-test"
+      PATHH = "D:/jenkins/workspace/blue-project"
       PLATFORM= "Debug"
 
   }
@@ -32,7 +32,7 @@ pipeline {
       stage('Checkout') {
         steps {
         // Get Github repo using Github credentials (previously added to Jenkins credentials)
-        checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/JeanGonzalo/netFramework-devops.git']]])        }
+        checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/JeanGonzalo/netFramework-devops2.git']]])        }
       }
     
       stage("SonarQube - Static Code Analysis") {
