@@ -22,7 +22,7 @@ pipeline {
       SONAR_AUTH_TOKEN = '6d04544a33272dddd889aef89ee658badc6009b2'
       NEXUS_URL = "http://192.168.1.34:8081"
       NEXUS_REPOSITORY = "nuget-hosted"
-      PATHH = "D:/jenkins/workspace/blue-project"
+      PATHH = "D:\jenkins\workspace\blue-project"
       PLATFORM= "Debug"
 
   }
@@ -63,8 +63,9 @@ pipeline {
       stage("Publish to Nexus Repository Manager") {
             steps {
                 script {   
-                            bat "cd ContosoUniversity/bin && tar -a -c -f ${PLATFORM}.zip ${PLATFORM} && dir \                            
-                                curl --fail -u admin:jeandevops --upload-file ${PLATFORM}.zip 'http://192.168.1.34:8081/repository/nuget-raw/${PLATFORM}.zip'"
+                            bat "cd ContosoUniversity/bin && tar -a -c -f ${PLATFORM}.zip ${PLATFORM} && dir" 
+                            bat "copy ContosoUniversity/bin/${PLATFORM}.zip ."                           
+                            bat "curl --fail -u admin:jeandevops --upload-file ${PLATFORM}.zip 'http://192.168.1.34:8081/repository/nuget-raw/${PLATFORM}.zip'"
                             
                             //bat "dir && cd ContosoUniversity && cd , && dir"
                             
