@@ -53,9 +53,9 @@ pipeline {
             steps {
                 script {
                     
-                        //powershell  "MsBuild.exe /t:Rebuild"
+                        powershell  " MsBuild.exe /t:Rebuild"
                         //powershell  "MsBuild.exe /t:Clean && MsBuild.exe /t:Rebuild"
-                        powershell "MSBuild.exe ContosoUniversity.sln /p:Configuration=Release"
+                        //powershell "MSBuild.exe ContosoUniversity.sln /p:Configuration=Release"
                 }
             }
       }
