@@ -1,0 +1,23 @@
+/node_modules
+/.sonarqube_home/*
+/.sonarqube_home/**
+/sonarqube_home/*
+/sonarqube_home/**
+sonarqube_home/*
+sonarqube_home/**
+sonarqube_home
+/sonarqube_home
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+/ConstosoUniversity/bin/Release
+/ConstosoUniversity/bin/Release/*
+/ConstosoUniversity/bin/Debug
+/ConstosoUniversity/bin/Debug/*
+
+/packages
+/.packages
