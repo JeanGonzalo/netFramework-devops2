@@ -6,18 +6,6 @@ import groovy.json.JsonOutput
 import java.net.URL
 import java.net.URLEncoder
 
-package org.jenkinsci.plugins.pipeline.utility.steps.fs;
-
-import org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition;
-import org.jenkinsci.plugins.workflow.job.WorkflowJob;
-import org.jenkinsci.plugins.workflow.job.WorkflowRun;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.jvnet.hudson.test.JenkinsRule;
-
-import hudson.model.Label;
-
 @NonCPS
 def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
@@ -78,12 +66,12 @@ pipeline {
                             // bat "cd ContosoUniversity/bin && tar -a -c -f ${PLATFORM}.zip ${PLATFORM} && dir" 
                             // bat "copy ContosoUniversity/bin/${PLATFORM}.zip . && cd , && dir"
                             // bat "echo testtttttt"                           
-                            //bat "curl --fail -u admin:jeandevops --upload-file bin.zip 'http://192.168.1.34:8081/repository/nuget-raw/bin.zip'"
+                            bat "curl --fail -u admin:jeandevops --upload-file bin.zip 'http://192.168.1.34:8081/repository/nuget-raw/bin.zip'"
                             
-                            def binaries = findFiles(glob: '*.zip')
-                                binaries.each { item ->
-                                    sh "curl -v --user 'admin:jeandevops' --upload-file ${item}  http://localhost:8081/repository/nuget-raw/bin.zip'"
-                                }
+                            // def binaries = context.findFiles(glob: '*.zip')
+                            //     binaries.each { item ->
+                            //         sh "curl -v --user 'admin:jeandevops' --upload-file {item}  http://localhost:8081/repository/nuget-raw/bin.zip'"
+                            //     }
                     
                             //bat "dir && cd ContosoUniversity && cd , && dir"
                             
