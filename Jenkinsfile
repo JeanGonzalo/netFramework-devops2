@@ -18,7 +18,7 @@ pipeline {
   environment {
       // General Variables for Pipeline
       PROJECT_ROOT = 'project-test'
-      SONAR_HOST_URL = 'http://192.168.1.34:9000'
+      SONAR_HOST_URL = 'http://192.168.1.34:9001'
       SONAR_AUTH_TOKEN = '6d04544a33272dddd889aef89ee658badc6009b2'
       NEXUS_URL = "http://192.168.1.34:8081"
       NEXUS_REPOSITORY = "nuget-hosted"
