@@ -60,3 +60,19 @@ def qualityGateValidation(qg) {
                       }
                     }
                 }
+
+                [16:16] Edwin David Contreras Torres
+steps.powershell([script: "\$server = New-PSSession -Name AppServer -ComputerName ${​​​​​​deployProperties.SERVER}​​​​​​ -Credential (New-object System.Management.Automation.PSCredential -ArgumentList @('${​​​​​​script.env.USERNAME}​​​​​​',('${​​​​​​script.env.PASS}​​​​​​'|ConvertTo-secureString -AsPlainText -Force)));Invoke-Command -Session \$server -ScriptBlock {​​​​​​Stop-WebSite -Name '${​​​​​​deployProperties.SITE_NAME}​​​​​​';}​​​​​​"])
+
+[16:16] Edwin David Contreras Torres
+copy files 
+
+[16:16] Edwin David Contreras Torres
+steps.powershell([script: "\$server = New-PSSession -Name server -ComputerName ${​​​​​​deployProperties.SERVER}​​​​​​ -Credential (New-object PSCredential -ArgumentList @('${​​​​​​script.env.USERNAME}​​​​​​', ('${​​​​​​script.env.PASS}​​​​​​'|ConvertTo-secureString -AsPlainText -Force)));Copy-Item –Path ${​​​​​​script.env.WORKSPACE}​​​​​​\\target\\${​​​​​​deployProperties.ARTIFACT_FOLDER}​​​​​​\\** –Destination '${​​​​​​deployProperties.SITE_PATH}​​​​​​' -Recurse -force –ToSession \$server;"])
+
+[16:16] Edwin David Contreras Torres
+start site
+
+[16:16] Edwin David Contreras Torres
+steps.powershell([script: "\$server = New-PSSession -Name AppServer -ComputerName ${​​​​​​deployProperties.SERVER}​​​​​​ -Credential (New-object System.Management.Automation.PSCredential -ArgumentList @('${​​​​​​script.env.USERNAME}​​​​​​',('${​​​​​​script.env.PASS}​​​​​​'|ConvertTo-secureString -AsPlainText -Force)));Invoke-Command -Session \$server -ScriptBlock {​​​​​​Start-WebSite -Name '${​​​​​​deployProperties.SITE_NAME}​​​​​​';}​​​​​​"])
+
