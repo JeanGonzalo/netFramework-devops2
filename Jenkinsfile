@@ -68,9 +68,9 @@ pipeline {
                             // bat "echo testtttttt"                           
                             //bat "curl --fail -u admin:jeandevops --upload-file bin.zip 'http://192.168.1.34:8081/repository/nuget-raw/bin.zip'"
                             
-                            def binaries = context.findFiles(glob: '*.zip')
+                            def binaries = findFiles(glob: '*.zip')
                                 binaries.each { item ->
-                                    sh "curl -v --user 'admin:jeandevops' --upload-file bin.zip  http://localhost:8081/repository/nuget-raw/bin.zip'"
+                                    sh "curl -v --user 'admin:jeandevops' --upload-file ${item}  http://localhost:8081/repository/nuget-raw/bin.zip'"
                                 }
                     
                             //bat "dir && cd ContosoUniversity && cd , && dir"
