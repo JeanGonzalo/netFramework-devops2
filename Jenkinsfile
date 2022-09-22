@@ -63,9 +63,8 @@ pipeline {
       stage("Publish to Nexus Repository Manager") {
             steps {
                 script {   
-                            bat "cd ContosoUniversity/bin && tar -a -c -f ${PLATFORM}.zip ${PLATFORM} && dir "
-                            bat "cd ContosoUniversity/bin \
-                            curl --fail -u admin:jeandevops --upload-file ${PLATFORM}.zip 'http://192.168.1.34:8081/repository/nuget-raw/${PLATFORM}.zip'"
+                            bat "cd ContosoUniversity/bin && tar -a -c -f ${PLATFORM}.zip ${PLATFORM} && dir \                            
+                                curl --fail -u admin:jeandevops --upload-file ${PLATFORM}.zip 'http://192.168.1.34:8081/repository/nuget-raw/${PLATFORM}.zip'"
                             
                             //bat "dir && cd ContosoUniversity && cd , && dir"
                             
