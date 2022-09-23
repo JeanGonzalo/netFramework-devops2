@@ -62,16 +62,16 @@ pipeline {
 
       
 
-      stage("Publish to Nexus Repository Manager") {
-            steps {
-                script {   
-                            bat "cd ContosoUniversity/bin && tar -a -c -f ${PLATFORM}.zip ${PLATFORM} && dir" 
-                            bat "copy ContosoUniversity\\bin\\${PLATFORM}.zip . && cd , && dir"                          
-                            bat "curl --fail -u admin:jeandevops --upload-file ./${PLATFORM}.zip http://192.168.1.34:8081/repository/nuget2-raw/${PLATFORM}.zip"
+      // stage("Publish to Nexus Repository Manager") {
+      //       steps {
+      //           script {   
+      //                       bat "cd ContosoUniversity/bin && tar -a -c -f ${PLATFORM}.zip ${PLATFORM} && dir" 
+      //                       bat "copy ContosoUniversity\\bin\\${PLATFORM}.zip . && cd , && dir"                          
+      //                       bat "curl --fail -u admin:jeandevops --upload-file ./${PLATFORM}.zip http://192.168.1.34:8081/repository/nuget2-raw/${PLATFORM}.zip"
                             
-                }
-            }
-      }
+      //           }
+      //       }
+      // }
 
       // stage("Deploy IIS") {
       //       steps {
