@@ -53,9 +53,9 @@ pipeline {
             steps {
                 script {
                     
-                        //bat  " MsBuild.exe /t:Rebuild"
+                        bat  " MsBuild.exe /t:Rebuild"
                         //bat "MsBuild.exe /t:Clean"
-                        bat "MSBuild.exe /t:Rebuild /p:Configuration=Release"
+                        //bat "MSBuild.exe /t:Rebuild /p:Configuration=Release"
                 }
             }
       }
