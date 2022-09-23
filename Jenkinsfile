@@ -12,7 +12,7 @@ def jsonParse(def json) {
 }
 
 pipeline {
-  agent {label "windowsnet"}
+  agent {label "windowsnode"}
 
 
   environment {
