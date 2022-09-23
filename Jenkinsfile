@@ -55,7 +55,7 @@ pipeline {
 
                         //powershell "MsBuild.exe --version"
                         //powershell "MsBuild.exe /t:Clean"
-                        powershell  " MsBuild.exe /t:Rebuild"
+                        powershell  " MsBuild.exe /t:Rebuild /p:Platform="Any CPU" "
                         //bat "MSBuild.exe /t:Rebuild /p:Configuration=Release -maxcpucount:3"
                 }
             }
