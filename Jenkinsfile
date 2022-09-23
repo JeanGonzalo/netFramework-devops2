@@ -53,10 +53,10 @@ pipeline {
             steps {
                 script {
 
-                        powershell "MsBuild.exe --version"
+                        //powershell "MsBuild.exe --version"
                         //powershell "MsBuild.exe /t:Clean"
                         //powershell  " MsBuild.exe /t:Rebuild"
-                        //bat "MSBuild.exe /t:Rebuild /p:Configuration=Release"
+                        bat "MSBuild.exe /t:Rebuild /p:Configuration=Release -maxcpucount:3"
                 }
             }
       }
