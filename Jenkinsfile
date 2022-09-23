@@ -40,7 +40,7 @@ pipeline {
                 script {
                     
 
-                        bat  " sonar-scanner -X -D sonar.host.url=${SONAR_HOST_URL} \
+                        powershell  " sonar-scanner -X -D sonar.host.url=${SONAR_HOST_URL} \
                               -D sonar.login=${SONAR_AUTH_TOKEN} \
                               -D sonar.projectKey=${PROJECT_ROOT} \
                               -D sonar.projectName=${PROJECT_ROOT} "
@@ -53,8 +53,8 @@ pipeline {
             steps {
                 script {
                     
-                        bat  " MsBuild.exe /t:Rebuild"
-                        //bat "MsBuild.exe /t:Clean"
+                        powershell "MsBuild.exe /t:Clean"
+                        powershell  " MsBuild.exe /t:Rebuild"
                         //bat "MSBuild.exe /t:Rebuild /p:Configuration=Release"
                 }
             }
@@ -63,9 +63,9 @@ pipeline {
       stage("Publish to Nexus Repository Manager") {
             steps {
                 script {   
-                            bat "cd ContosoUniversity/bin && tar -a -c -f ${PLATFORM}.zip ${PLATFORM} && dir" 
-                            bat "copy ContosoUniversity\\bin\\${PLATFORM}.zip . && cd , && dir"                          
-                            bat "curl --fail -u admin:jeandevops --upload-file ./${PLATFORM}.zip http://192.168.1.34:8081/repository/nuget2-raw/${PLATFORM}.zip"
+                            powershell "cd ContosoUniversity/bin && tar -a -c -f ${PLATFORM}.zip ${PLATFORM} && dir" 
+                            powershell "copy ContosoUniversity\\bin\\${PLATFORM}.zip . && cd , && dir"                          
+                            powershell "curl --fail -u admin:jeandevops --upload-file ./${PLATFORM}.zip http://192.168.1.34:8081/repository/nuget2-raw/${PLATFORM}.zip"
                             
                 }
             }
