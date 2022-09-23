@@ -35,6 +35,17 @@ pipeline {
         checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/JeanGonzalo/netFramework-devops2.git']]])        }
       }
     
+      stage("Build .net framework") {
+            steps {
+                script {
+
+                        //powershell "MsBuild.exe --version"
+                        //powershell "MsBuild.exe /t:Clean"
+                        powershell  "MsBuild.exe /t:Rebuild"
+                        //bat "MSBuild.exe /t:Rebuild /p:Configuration=Release -maxcpucount:3 /p:Platform="Any CPU""
+                }
+            }
+      }
       stage("SonarQube - Static Code Analysis") {
             steps {
                 script {
@@ -49,17 +60,7 @@ pipeline {
             }
       }
 
-      stage("Build .net framework") {
-            steps {
-                script {
-
-                        //powershell "MsBuild.exe --version"
-                        //powershell "MsBuild.exe /t:Clean"
-                        powershell  " MsBuild.exe /t:Rebuild /p:Platform="Any CPU" "
-                        //bat "MSBuild.exe /t:Rebuild /p:Configuration=Release -maxcpucount:3"
-                }
-            }
-      }
+      
 
       stage("Publish to Nexus Repository Manager") {
             steps {
