@@ -6,10 +6,6 @@ import groovy.json.JsonOutput
 import java.net.URL
 import java.net.URLEncoder
 
-@NonCPS
-def jsonParse(def json) {
-    new groovy.json.JsonSlurperClassic().parseText(json)
-}
 
 pipeline {
   agent {label "windowsnode"}
@@ -22,7 +18,7 @@ pipeline {
       SONAR_AUTH_TOKEN = '6d04544a33272dddd889aef89ee658badc6009b2'
       NEXUS_URL = "http://192.168.1.34:8081"
       NEXUS_REPOSITORY = "nuget-hosted"
-      PATHH = "D:\\jenkins\\workspace\\blue-project"
+      //PATHH = "D:\\jenkins\\workspace\\blue-project"
       PLATFORM= "Debug"
 
   }
@@ -46,19 +42,20 @@ pipeline {
                 }
             }
       }
-      stage("SonarQube - Static Code Analysis") {
-            steps {
-                script {
+
+      // stage("SonarQube - Static Code Analysis") {
+      //       steps {
+      //           script {
                     
 
-                        powershell  " sonar-scanner -X -D sonar.host.url=${SONAR_HOST_URL} \
-                              -D sonar.login=${SONAR_AUTH_TOKEN} \
-                              -D sonar.projectKey=${PROJECT_ROOT} \
-                              -D sonar.projectName=${PROJECT_ROOT} "
-                            //-Dsonar.projectVersion='${projectVersion}' ${pullRequestParams} \
-                }
-            }
-      }
+      //                   powershell  " sonar-scanner -X -D sonar.host.url=${SONAR_HOST_URL} \
+      //                         -D sonar.login=${SONAR_AUTH_TOKEN} \
+      //                         -D sonar.projectKey=${PROJECT_ROOT} \
+      //                         -D sonar.projectName=${PROJECT_ROOT} "
+      //                       //-Dsonar.projectVersion='${projectVersion}' ${pullRequestParams} \
+      //           }
+      //       }
+      // }
 
       
 
