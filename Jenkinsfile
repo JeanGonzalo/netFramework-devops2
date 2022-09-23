@@ -64,34 +64,29 @@ pipeline {
             steps {
                 script {   
                             bat "cd ContosoUniversity/bin && tar -a -c -f ${PLATFORM}.zip ${PLATFORM} && dir" 
-                            bat "copy ContosoUniversity\\bin\\${PLATFORM}.zip . && cd , && dir"
-                            bat "echo testtttttt"                           
-                            //bat "curl --fail -u admin:jeandevops --upload-file ./${PLATFORM}.zip http://192.168.1.34:8081/repository/nuget2-raw/${PLATFORM}.zip"
+                            bat "copy ContosoUniversity\\bin\\${PLATFORM}.zip . && cd , && dir"                          
+                            bat "curl --fail -u admin:jeandevops --upload-file ./${PLATFORM}.zip http://192.168.1.34:8081/repository/nuget2-raw/${PLATFORM}.zip"
                             
-                            // def binaries = context.findFiles(glob: '*.zip')
-                            //     binaries.each { item ->
-                            //         sh "curl -v --user 'admin:jeandevops' --upload-file {item}  http://localhost:8081/repository/nuget-raw/bin.zip'"
-                            //     }
-                    
-                            //bat "dir && cd ContosoUniversity && cd , && dir"
-                            
-                            // bat "dir \
-                            // cd ContosoUniversity \
-                            // cd , \
-                            // dir"
-                            //bat "zip bin2.zip bin/"
-
-                            //bat  "dotnet nuget push '${PATHH}/**/*.nupkg' --source ${NEXUS_URL}/repository/${NEXUS_REPOSITORY}"
                 }
             }
       }
+
+      // stage("Deploy IIS") {
+      //       steps {
+      //           script {   
+      //                       // stop IIS
+      //                       bat "\$server = New-PSSession -Name AppServer -ComputerName ${​​​​​​deployProperties.SERVER}​​​​​​ -Credential (New-object System.Management.Automation.PSCredential -ArgumentList @('${​​​​​​script.env.USERNAME}​​​​​​',('${​​​​​​script.env.PASS}​​​​​​'|ConvertTo-secureString -AsPlainText -Force)));Invoke-Command -Session \$server -ScriptBlock {​​​​​​Stop-WebSite -Name '${​​​​​​deployProperties.SITE_NAME}​​​​​​';}​​​​​​"
+
+      //                       // copy file
+      //                       bat "\$server = New-PSSession -Name server -ComputerName ${​​​​​​deployProperties.SERVER}​​​​​​ -Credential (New-object PSCredential -ArgumentList @('${​​​​​​script.env.USERNAME}​​​​​​', ('${​​​​​​script.env.PASS}​​​​​​'
+      //                           |ConvertTo-secureString -AsPlainText -Force)));Copy-Item –Path ${​​​​​​script.env.WORKSPACE}​​​​​​\\target\\${​​​​​​deployProperties.ARTIFACT_FOLDER}​​​​​​\\** –Destination '${​​​​​​deployProperties.SITE_PATH}​​​​​​' -Recurse -force –ToSession \$server;"
+
+      //                       //start Site
+      //                       bat "\$server = New-PSSession -Name AppServer -ComputerName ${​​​​​​deployProperties.SERVER}​​​​​​ -Credential (New-object System.Management.Automation.PSCredential -ArgumentList @('${​​​​​​script.env.USERNAME}​​​​​​',('${​​​​​​script.env.PASS}​​​​​​'
+      //                           |ConvertTo-secureString -AsPlainText -Force)));Invoke-Command -Session \$server -ScriptBlock {​​​​​​Start-WebSite -Name '${​​​​​​deployProperties.SITE_NAME}​​​​​​';}​​​​​​"
+      //           }
+      //       }
+      // }
   }
 }
 
-// Function to validate that the message returned from SonarQube is ok
-def qualityGateValidation(qg) {
-  if (qg.status != 'OK') {
-    return true
-  }
-  return false
-}
