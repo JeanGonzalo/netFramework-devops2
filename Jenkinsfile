@@ -6,9 +6,9 @@ import groovy.json.JsonOutput
 import java.net.URL
 import java.net.URLEncoder
 
-
+@Library('blueLibs') _
 pipeline {
-  agent {label "windowsnode"}
+  agent {label "windowsnet"}
 
 
   environment {
@@ -34,58 +34,28 @@ pipeline {
       stage("Build .net framework") {
             steps {
                 script {
-
-                        //powershell "MsBuild.exe --version"
-                        //powershell "MsBuild.exe /t:Clean"
-                        powershell "MsBuild.exe /t:Rebuild"
-                        //bat "MSBuild.exe /t:Rebuild /p:Configuration=Release -maxcpucount:3 /p:Platform="Any CPU""
+                        pipelineLibs.netFrameworkBuild(netBuild: "Rebuild")
                 }
             }
       }
 
-      // stage("SonarQube - Static Code Analysis") {
-      //       steps {
-      //           script {
-                    
+      stage("SonarQube - Static Code Analysis") {
+            steps {
+                script {
+                        pipelineLibs.sonarqubeBuild(sonarUrl: "${SONAR_HOST_URL}",
+                                                    sonarToken: "${SONAR_AUTH_TOKEN}",
+                                                    projectName: "blue-libraries-test")
+                }
+            }
+      }      
 
-      //                   powershell  " sonar-scanner -X -D sonar.host.url=${SONAR_HOST_URL} \
-      //                         -D sonar.login=${SONAR_AUTH_TOKEN} \
-      //                         -D sonar.projectKey=${PROJECT_ROOT} \
-      //                         -D sonar.projectName=${PROJECT_ROOT} "
-      //                       //-Dsonar.projectVersion='${projectVersion}' ${pullRequestParams} \
-      //           }
-      //       }
-      // }
-
-      
-
-      // stage("Publish to Nexus Repository Manager") {
-      //       steps {
-      //           script {   
-      //                       bat "cd ContosoUniversity/bin && tar -a -c -f ${PLATFORM}.zip ${PLATFORM} && dir" 
-      //                       bat "copy ContosoUniversity\\bin\\${PLATFORM}.zip . && cd , && dir"                          
-      //                       bat "curl --fail -u admin:jeandevops --upload-file ./${PLATFORM}.zip http://192.168.1.34:8081/repository/nuget2-raw/${PLATFORM}.zip"
-                            
-      //           }
-      //       }
-      // }
-
-      // stage("Deploy IIS") {
-      //       steps {
-      //           script {   
-      //                       // stop IIS
-      //                       bat "\$server = New-PSSession -Name AppServer -ComputerName ${​​​​​​deployProperties.SERVER}​​​​​​ -Credential (New-object System.Management.Automation.PSCredential -ArgumentList @('${​​​​​​script.env.USERNAME}​​​​​​',('${​​​​​​script.env.PASS}​​​​​​'|ConvertTo-secureString -AsPlainText -Force)));Invoke-Command -Session \$server -ScriptBlock {​​​​​​Stop-WebSite -Name '${​​​​​​deployProperties.SITE_NAME}​​​​​​';}​​​​​​"
-
-      //                       // copy file
-      //                       bat "\$server = New-PSSession -Name server -ComputerName ${​​​​​​deployProperties.SERVER}​​​​​​ -Credential (New-object PSCredential -ArgumentList @('${​​​​​​script.env.USERNAME}​​​​​​', ('${​​​​​​script.env.PASS}​​​​​​'
-      //                           |ConvertTo-secureString -AsPlainText -Force)));Copy-Item –Path ${​​​​​​script.env.WORKSPACE}​​​​​​\\target\\${​​​​​​deployProperties.ARTIFACT_FOLDER}​​​​​​\\** –Destination '${​​​​​​deployProperties.SITE_PATH}​​​​​​' -Recurse -force –ToSession \$server;"
-
-      //                       //start Site
-      //                       bat "\$server = New-PSSession -Name AppServer -ComputerName ${​​​​​​deployProperties.SERVER}​​​​​​ -Credential (New-object System.Management.Automation.PSCredential -ArgumentList @('${​​​​​​script.env.USERNAME}​​​​​​',('${​​​​​​script.env.PASS}​​​​​​'
-      //                           |ConvertTo-secureString -AsPlainText -Force)));Invoke-Command -Session \$server -ScriptBlock {​​​​​​Start-WebSite -Name '${​​​​​​deployProperties.SITE_NAME}​​​​​​';}​​​​​​"
-      //           }
-      //       }
-      // }
+      stage("Publish to Nexus Repository Manager") {
+            steps {
+                script {   
+                        pipelineLibs.publishNexus(platform: "Debug")  
+                }
+            }
+      }
   }
 }
 
