@@ -34,7 +34,7 @@ pipeline {
       stage("Build .net framework") {
             steps {
                 script {
-                        pipelineLibs.netFrameworkBuild(netBuild: "version")
+                        pipelineLibs.netFrameworkBuild(netBuild: "--version")
                 }
             }
       }
