@@ -11,6 +11,6 @@ bluePipeline(
     netBuild: "--version",
     projectName: "blue-libraries-test",
     platform: "Debug",
-    zipName: "ContosoUniversity"
+    zipName: "ContosoUniversity",
     nexusPublish: "ContosoUniversity"
 )
