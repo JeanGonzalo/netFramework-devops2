@@ -21,3 +21,5 @@ sonarqube_home
 
 /packages
 /.packages
+
+*.zip

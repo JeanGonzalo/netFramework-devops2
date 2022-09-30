@@ -10,5 +10,6 @@ import java.net.URLEncoder
 bluePipeline(
     netBuild: "--version",
     projectName: "blue-libraries-test",
-    platform: "Debug"
+    platform: "Debug",
+    zipName: "ContosoUniversity"
 )
