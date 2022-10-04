@@ -7,9 +7,9 @@ import java.net.URL
 import java.net.URLEncoder
 @Library('blueLibs@main') _
 bluePipeline(
-    netBuild: "--version"
+    netBuild: "--version",
     //projectName: "blue-libraries-test"
     //platform: "Debug"
-    zipName: "ContosoUniversity"
+    zipName: "ContosoUniversity",
     nexusPublish: "ContosoUniversity"
 )
