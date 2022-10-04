@@ -1,4 +1,4 @@
-@Library('blueLibs@feat/pipeline') _
+@Library('blueLibs') _
 bluePipeline(
     netBuild: "--version"
     projectName: "blue-libraries-test"
