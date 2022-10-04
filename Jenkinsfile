@@ -5,7 +5,7 @@ import groovy.json.JsonBuilder
 import groovy.json.JsonOutput
 import java.net.URL
 import java.net.URLEncoder
-@Library('blueLibs@main') _
+@Library('blueLibs@feat/pipeline') _
 bluePipeline(
     netBuild: "--version",
     //projectName: "blue-libraries-test"
