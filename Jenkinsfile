@@ -1,8 +1,8 @@
-@Library('blueLibs@feat/pipeline') _
+@Library('blueLibs') _
 bluePipeline{
     netBuild = "--version"
     projectName = "blue-libraries-test"
     platform = "Debug"
-    //zipName = "ContosoUniversity"
+    zipName = "ContosoUniversity"
     nexusPublish = "ContosoUniversity"
 }
